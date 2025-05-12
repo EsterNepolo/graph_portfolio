@@ -6,74 +6,166 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ester Nepolo | Generative AI Portfolio</title>
   <style>
+    /*====================
+      Color Palette & Root Vars
+    ====================*/
     :root {
-      --bg-color: #f9fafb;
-      --primary-color: #1e3a8a;
-      --accent-color: #3b82f6;
-      --text-color: #1f2937;
-      --max-width: 960px;
+      --primary-gradient-start: #8e2de2; /* Purple */
+      --primary-gradient-end:   #4a00e0; /* Deep violet */
+      --bg-body:   #f9fafb;
+      --bg-dark:   #111827;
+      --text-light: #ffffff;
+      --text-dark:  #1f2937;
+      --max-width:  1000px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /*====================
+      Global Reset & Typography
+    ====================*/
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Segoe UI",Roboto,Arial,sans-serif;
+      font-size:0.95rem; /* slightly smaller base font */
+      line-height:1.6;
+      color:var(--text-dark);
+      background:var(--bg-body);
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%;height:auto}
 
-    body {
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      line-height: 1.6;
-      color: var(--text-color);
-      background: var(--bg-color);
+    /*====================
+      HERO SECTION
+    ====================*/
+    header.hero{
+      background:linear-gradient(135deg,var(--primary-gradient-start),var(--primary-gradient-end));
+      color:var(--text-light);
+      padding:3.5rem 1rem 3rem; /* slightly reduced vertical padding */
+    }
+    .hero__inner{
+      max-width:var(--max-width);
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
     }
 
-    header {
-      background: var(--primary-color);
-      color: #fff;
-      padding: 2rem 1rem;
-      text-align: center;
+    .profile-img{
+      width:200px;
+      height:200px;
+      border-radius:50%;
+      object-fit:cover;
+      object-position:center top;
+      border:4px solid var(--text-light);
+      margin-bottom:1.25rem;
+      box-shadow:0 4px 10px rgba(0,0,0,.25);
+    }
+    .hero__name{
+      font-size:clamp(1.75rem,4.5vw,3rem); /* reduced */
+      font-weight:700;
+    }
+    .hero__subtitle{
+      font-size:1.05rem; /* reduced */
+      font-weight:500;
+      margin-top:.2rem;
+      opacity:.95;
     }
 
-    header h1 { font-size: 2.25rem; margin-bottom: .25rem; }
-    header p  { font-size: 1.1rem; opacity: .9; }
-
-    nav { margin-top: 1.5rem; }
-    nav a { color: #cbd5e1; margin: 0 .75rem; text-decoration: none; font-weight: 600; transition: color .2s ease; }
-    nav a:hover { color: #fff; }
-
-    main { margin: 0 auto; max-width: var(--max-width); padding: 2rem 1rem; }
-    section { margin-bottom: 3rem; }
-
-    section h2 {
-      font-size: 1.75rem; color: var(--primary-color); margin-bottom: 1rem; position: relative;
+    nav.hero__nav{
+      margin-top:1.4rem;
+      display:flex;
+      gap:.6rem;
+      flex-wrap:wrap;
+      justify-content:center;
     }
-    section h2::after {
-      content: ""; width: 60px; height: 4px; background: var(--accent-color); display: block; margin-top: .5rem;
+    .nav-pill{
+      padding:.5rem 1rem; /* reduced */
+      border-radius:9999px;
+      background:rgba(255,255,255,.15);
+      color:var(--text-light);
+      font-weight:600;
+      backdrop-filter:blur(10px);
+      transition:background .2s ease;
+      font-size:0.9rem; /* smaller text */
+    }
+    .nav-pill:hover{background:rgba(255,255,255,.25)}
+
+    /*====================
+      MAIN CONTENT WRAPPER
+    ====================*/
+    main{
+      max-width:var(--max-width);
+      margin:-2rem auto 0; /* adjust overlap */
+      padding:0 1rem 3.5rem;
     }
 
-    ul, ol { margin-left: 1.25rem; }
-    ul li, ol li { margin-bottom: .5rem; }
+    section{margin-bottom:3rem}
+    section h2{
+      font-size:1.6rem; /* reduced */
+      margin-bottom:.9rem;
+      position:relative;
+      color:var(--primary-gradient-end);
+    }
+    section h2::after{
+      content:"";
+      width:56px;
+      height:3px; /* thinner */
+      background:var(--primary-gradient-start);
+      display:block;
+      margin-top:.35rem;
+    }
 
-    footer { background: #e5e7eb; color: #4b5563; text-align: center; padding: 1rem; font-size: .9rem; }
+    #about-me,#about-course,#submissions{
+      background:var(--bg-dark);
+      color:var(--text-light);
+      padding:2.5rem 1.25rem; /* reduced */
+      border-radius:12px;
+      box-shadow:0 8px 16px rgba(0,0,0,.15);
+    }
 
-    a.inline-link { color: var(--accent-color); text-decoration: none; }
-    a.inline-link:hover { text-decoration: underline; }
+    #about-me a,#about-course a,#submissions a{color:#c084fc}
+
+    ul,ol{margin-left:1.15rem;font-size:0.93rem} /* smaller list font */
+    li{margin-bottom:.4rem}
+
+    p{font-size:0.95rem}
+
+    .inline-link{text-decoration:underline;text-underline-offset:2px;transition:opacity .2s ease;font-size:0.95rem}
+    .inline-link:hover{opacity:.75}
+
+    footer{font-size:.8rem} /* smaller footer */
+
+    @media(min-width:640px){
+      .hero__inner{flex-direction:row;text-align:left}
+      .profile-img{margin:0 1.8rem 0 0}
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Ester Ndahekelekwa Nepolo</h1>
-    <p>Public Health Professional &amp; PhD Candidate | Health Systems &amp; AI Enthusiast</p>
-    <nav>
-      <a href="#about-me">About Me</a>
-      <a href="#about-course">About the Course</a>
-      <a href="#submissions">Weekly Submissions</a>
-    </nav>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero__inner">
+      <img class="profile-img" src="https://raw.githubusercontent.com/EsterNepolo/graph_portfolio/main/1000269779.jpg" alt="Generative AI portrait of Ester Nepolo">
+      <div>
+        <h1 class="hero__name">Ester Ndahekelekwa Nepolo</h1>
+        <p class="hero__subtitle">Generative AI for Work &amp; Research</p>
+        <nav class="hero__nav">
+          <a href="#about-me" class="nav-pill">About Me</a>
+          <a href="#about-course" class="nav-pill">About the Course</a>
+          <a href="#submissions" class="nav-pill">Weekly Submissions</a>
+        </nav>
+      </div>
+    </div>
   </header>
 
+  <!-- MAIN CONTENT -->
   <main>
     <!-- About Me -->
     <section id="about-me">
       <h2>About Me</h2>
       <p>I am a Namibian public‑health professional and PhD candidate with 20 + years of experience in health systems research, monitoring &amp; evaluation, and policy advisory roles. Passionate about leveraging data and emerging technologies to strengthen healthcare delivery.</p>
-      <p>
-        <a class="inline-link" href="https://esternepolo.github.io/" target="_blank" rel="noopener">Website</a> |
+      <p style="margin-top:1rem;">
+        <a class="inline-link" href="https://esternepolo.github.io/" target="_blank" rel="noopener">Website</a> &bull;
         <a class="inline-link" href="https://www.linkedin.com/in/ester-nepolo-032a94a6/" target="_blank" rel="noopener">LinkedIn</a>
       </p>
     </section>
@@ -108,8 +200,10 @@
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Ester Nepolo</p>
+  <!-- FOOTER -->
+  <footer style="text-align:center;padding:1rem;background:#e5e7eb;color:#4b5563;">
+    &copy; 2025 Ester Nepolo &mdash; Generative AI Portfolio
   </footer>
 </body>
 </html>
+
